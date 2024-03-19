@@ -16,6 +16,7 @@ app.use(helmet());
 app.use(xss());
 app.use(hpp());
 app.use(mongoSanitize());
+app.set('trust proxy', true);
 const limiter = rateLimit({
   windowMs: 10 * 60 * 1000,
   max: 100,
