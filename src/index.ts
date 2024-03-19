@@ -11,6 +11,7 @@ import authRoutes from './routes/authRoutes';
 
 const app: Express = express();
 
+app.use(express.json());
 app.use(helmet());
 app.use(xss());
 app.use(hpp());
@@ -20,7 +21,6 @@ const limiter = rateLimit({
   max: 100,
 });
 app.use(limiter);
-app.use(express.json());
 
 import './database/connectDb';
 

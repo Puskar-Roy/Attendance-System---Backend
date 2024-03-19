@@ -1,7 +1,7 @@
 {
-  "name": "create-express-ts-template",
+  "name": "attendance-system-backend",
   "version": "1.0.0",
-  "description": "This is a Starter For Express Js Backend With Typescript.",
+  "description": "Express Js Backend With Typescript.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/BoBsRepository/create-express-ts-template"
+    "url": "https://github.com/Puskar-Roy/Attendance-System---Backend"
   },
   "author": "Puskar Roy",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/BoBsRepository/create-express-ts-template/issues"
+    "url": "https://github.com/Puskar-Roy/Attendance-System---Backend/issues"
   },
-  "homepage": "https://github.com/BoBsRepository/create-express-ts-template#readme",
+  "homepage": "https://github.com/Puskar-Roy/Attendance-System---Backend#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "colorette": "^2.0.20",

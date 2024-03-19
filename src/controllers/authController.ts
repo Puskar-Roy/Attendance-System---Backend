@@ -6,43 +6,12 @@ import bcrypt from 'bcryptjs';
 import validator from 'validator';
 import { CookieOptions } from '../interfaces/cookieOption';
 import config from '../config/config';
-
-export const testRoute = asyncHandler(async (req: Request, res: Response) => {
-  res.json({ success: true });
-});
+import { createToken } from '../util/utils';
 
 export const login = asyncHandler(async (req: Request, res: Response) => {
+  const { email, password } = req.body;
   try {
-    const { email, password } = req.body;
-    const user = await UserModel.findOne({ email });
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: 'Invalid credentials',
-      });
-    }
-    const isPasswordMatch = await bcrypt.compare(password, user.password);
-    if (!isPasswordMatch) {
-      return res.status(401).json({
-        success: false,
-        message: 'Invalid credentials',
-      });
-    }
-    const token = jwt.sign({ userId: user._id }, config.JWT_SECRET);
-    const expireTime: number = parseInt(config.JWT_COOKIE_EXPIRES_IN);
-
-    const cookieOptions: CookieOptions = {
-      expires: new Date(Date.now() + expireTime * 24 * 60 * 60 * 1000),
-      httpOnly: true,
-      secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
-      sameSite: 'strict',
-    };
-    res.cookie('jwt', token, cookieOptions);
-    user.password = undefined;
-    user.cpassword = undefined;
-    res.setHeader('Authorization', `Bearer ${token}`);
-
-    res.status(200).json({ success: true, data: user, jwt_token: token });
+    res.status(200).json({ success: true });
   } catch (error) {
     console.error('Login error:', error);
     res.status(500).json({
@@ -53,36 +22,29 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
 });
 
 export const register = asyncHandler(async (req: Request, res: Response) => {
-  const { name, email, password, cpassword } = req.body;
-
-  if (!name || !email || !password || !cpassword || !validator.isEmail(email)) {
-    return res
-      .status(400)
-      .json({ message: 'Invalid input data!', success: false });
+  const { name, email, password } = req.body;
+  if (!name || !email || !password) {
+    throw Error('All fields must be filled');
   }
-  const checkUser = await UserModel.findOne({ email });
-  if (checkUser) {
-    return res
-      .status(409)
-      .json({ success: false, message: 'User already exists!' });
+  if (!validator.isEmail(email)) {
+    throw Error('Email is not valid');
   }
   try {
-    const user = new UserModel({
-      name,
-      email,
-      password,
-      cpassword,
-    });
-    await user.save();
+    const exists = await UserModel.findOne({ email });
+    if (exists) {
+      throw Error('Email already in use');
+    }
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
+    const user = await UserModel.create({ name, email, password: hash });
+    const token = createToken(user._id);
     return res.status(201).json({
       message: 'Registration successful!',
       success: true,
-      userId: user._id,
+      token: token,
     });
   } catch (error) {
-    console.error('Registration error:', error);
-    return res
-      .status(500)
-      .json({ message: 'Registration failed!', success: false });
+    console.error('Registration error:', error.message);
+    return res.status(500).json({ message: error.message, success: false });
   }
 });
