@@ -9,6 +9,7 @@ import config from './config/config';
 import CheckError from './util/checkError';
 import errorHandler from './middleware/errorMiddleware';
 import authRoutes from './routes/authRoutes';
+import { protect } from './middleware/middleware';
 
 const app: Express = express();
 
