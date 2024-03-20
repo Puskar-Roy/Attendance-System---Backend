@@ -18,7 +18,8 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
     if (!user) {
       throw Error('Email is not valid');
     }
-    const match = bcrypt.compare(password, user.password);
+    console.log(password + ' || ' + user.password);
+    const match = await bcrypt.compare(password, user.password);
     if (!match) {
       throw Error('Invalid credentials');
     }
@@ -27,6 +28,7 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
       message: 'Login successful!',
       success: true,
       token: token,
+      email: user.email,
     });
   } catch (error) {
     console.error('Login error:', error.message);

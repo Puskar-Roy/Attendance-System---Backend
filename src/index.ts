@@ -4,6 +4,7 @@ import xss from 'xss-clean';
 import hpp from 'hpp';
 import rateLimit from 'express-rate-limit';
 import mongoSanitize from 'express-mongo-sanitize';
+import cors, { CorsOptions } from 'cors';
 import config from './config/config';
 import CheckError from './util/checkError';
 import errorHandler from './middleware/errorMiddleware';
@@ -11,6 +12,17 @@ import authRoutes from './routes/authRoutes';
 
 const app: Express = express();
 
+const whitelist = ['http://localhost:5173', 'https://timekeeper-xi.vercel.app'];
+const corsOptions: CorsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(helmet());
 app.use(xss());
