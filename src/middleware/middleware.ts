@@ -30,7 +30,6 @@ export const protect = (
     }
 
     const decoded = jwt.verify(token, config.JWT_SECRET) as TokenData;
-    console.log(decoded._id);
     req._id = decoded._id;
     next();
   } catch (error) {
