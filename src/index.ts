@@ -10,10 +10,11 @@ import CheckError from './util/checkError';
 import errorHandler from './middleware/errorMiddleware';
 import authRoutes from './routes/authRoutes';
 import attendanceRoutes from './routes/attendanceRoutes';
+import userRoutes from './routes/userRoutes';
 
 const app: Express = express();
 
-const whitelist = ['http://localhost:5173', 'https://timekeeper-xi.vercel.app'];
+const whitelist = ['https://timekeeper-xi.vercel.app'];
 const corsOptions: CorsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -23,8 +24,7 @@ const corsOptions: CorsOptions = {
     }
   },
 };
-// config.DEV_MODE === 'DEV' ? app.use(cors()) : app.use(cors(corsOptions));
-app.use(cors());
+app.use(config.DEV_ENV === 'PROD' ? cors(corsOptions) : cors());
 app.use(express.json());
 app.use(helmet());
 app.use(xss());
@@ -41,6 +41,7 @@ import './database/connectDb';
 
 app.use('/api/auth', authRoutes);
 app.use('/api', attendanceRoutes);
+app.use('/api', userRoutes);
 
 app.get('/', (req: Request, res: Response) => {
   res.json({ success: true, message: 'API IS WORKING 🥳' });
