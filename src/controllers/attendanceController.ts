@@ -143,3 +143,21 @@ export const changeAttendance = asyncHandler(
     }
   }
 );
+
+export const deleteAttendance = asyncHandler(
+  async (req: Request, res: Response) => {
+    const { id } = req.params;
+    try {
+      const attendance = await AttendanceModel.findByIdAndDelete({ _id: id });
+
+      if (!attendance) {
+        return res.status(404).json({ message: 'Attendance not found' });
+      }
+
+      res.status(200).json({ message: 'Delete Succesfully!' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Server Error' });
+    }
+  }
+);
