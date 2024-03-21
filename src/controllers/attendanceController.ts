@@ -39,6 +39,30 @@ export const getAttendance = asyncHandler(
     }
   }
 );
+// export const getAttendancewithDate = asyncHandler(
+//   async (req: Request, res: Response) => {
+//     try {
+//       const { date } = req.params;
+
+//       if (!date) {
+//         return res.status(400).json({ message: 'Date parameter is required.' });
+//       }
+
+//       const attendance = await AttendanceModel.find({
+//         date: {
+//           $gte: new Date(date),
+//           $lt: new Date(date).setDate(new Date(date).getDate() + 1),
+//         },
+//       }).exec();
+
+//       res.status(200).send(attendance);
+//     } catch (err) {
+//       console.error(err);
+//       res.status(500).send('Server Error');
+//     }
+//   }
+// );
+
 export const getAttendancewithDate = asyncHandler(
   async (req: Request, res: Response) => {
     try {
@@ -53,7 +77,9 @@ export const getAttendancewithDate = asyncHandler(
           $gte: new Date(date),
           $lt: new Date(date).setDate(new Date(date).getDate() + 1),
         },
-      }).exec();
+      })
+        .populate('userId', 'name email')
+        .exec();
 
       res.status(200).send(attendance);
     } catch (err) {
@@ -62,7 +88,6 @@ export const getAttendancewithDate = asyncHandler(
     }
   }
 );
-
 export const getAttendanceCounts = asyncHandler(
   async (req: Request, res: Response) => {
     try {
