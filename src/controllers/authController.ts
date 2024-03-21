@@ -1,11 +1,8 @@
 import { Request, Response } from 'express';
 import asyncHandler from '../util/catchAsync';
 import UserModel from '../models/userSchema';
-import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import validator from 'validator';
-import { CookieOptions } from '../interfaces/cookieOption';
-import config from '../config/config';
 import { createToken } from '../util/utils';
 
 export const login = asyncHandler(async (req: Request, res: Response) => {

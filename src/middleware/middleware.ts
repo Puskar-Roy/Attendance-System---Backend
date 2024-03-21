@@ -2,19 +2,13 @@ import { Request as ExpressRequest, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import config from '../config/config';
 import UserModel from '../models/userSchema';
+import { TokenData } from '../interfaces/tokenInterface';
 
 interface RequestWithUserId extends ExpressRequest {
   _id: string;
   iat: number;
   exp: number;
 }
-
-interface TokenData {
-  _id: string;
-  iat: number;
-  exp: number;
-}
-
 export const protect = (
   req: RequestWithUserId,
   res: Response,
