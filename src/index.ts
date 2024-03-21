@@ -14,7 +14,7 @@ import userRoutes from './routes/userRoutes';
 
 const app: Express = express();
 
-const whitelist = ['https://timekeeper-xi.vercel.app'];
+const whitelist = ['https://attendancee.vercel.app'];
 const corsOptions: CorsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
