@@ -161,3 +161,37 @@ export const deleteAttendance = asyncHandler(
     }
   }
 );
+
+export const markAbsentUsers = asyncHandler(
+  async (req: Request, res: Response) => {
+    try {
+      const currentDate = new Date().setHours(0, 0, 0, 0);
+      console.log(currentDate);
+      const users = await UserModel.find();
+
+      for (const user of users) {
+        const existingAttendance = await AttendanceModel.findOne({
+          userId: user._id,
+          date: currentDate,
+        });
+
+        if (!existingAttendance) {
+          const newAttendance = new AttendanceModel({
+            userId: user._id,
+            date: currentDate,
+            status: 'absent',
+          });
+          await newAttendance.save();
+        }
+      }
+
+      res.status(200).json({
+        message:
+          'Attendance marked as absent for users who did not give attendance.',
+      });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Server Error' });
+    }
+  }
+);
