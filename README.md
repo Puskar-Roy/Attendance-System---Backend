@@ -2,23 +2,23 @@
 
 <br />
 <div align="center">
-  <a href="https://github.com/BoBsRepository/create-express-ts-template">
+  <a href="https://github.com/Puskar-Roy/Attendance-System---Backend">
     <img src="https://repository-images.githubusercontent.com/162537377/9c807700-9828-11ea-8a3b-47411956130e" alt="Logo" width="200" height="100">
   </a>
 
   <h3 align="center">Express Js with Typescript</h3>
 
   <p align="center">
-    An awesome template to jumpstart your Express.js (TypeScript) projects, helping you to speed up the process of building RESTful APIs.
+    Full-Stack JavaScript Attendance Portal - Backend
     <br />
-    <a href="https://github.com/BoBsRepository/create-express-ts-template"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Puskar-Roy/Attendance-System---Backend"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://create-expresss-ts.vercel.app">View Demo</a>
+    <a href="https://timekeeper-api.vercel.app">View Demo</a>
     ·
-    <a href="https://github.com/BoBsRepository/create-express-ts-template/issues">Report Bug</a>
+    <a href="https://github.com/Puskar-Roy/Attendance-System---Backend/issues">Report Bug</a>
     ·
-    <a href="https://github.com/BoBsRepository/create-express-ts-template/issues">Request Feature</a>
+    <a href="https://github.com/Puskar-Roy/Attendance-System---Backend/issues">Request Feature</a>
   </p>
 </div>
 
@@ -32,9 +32,6 @@
 ## About The Project
 
 
-Within this repository, you will discover a fully configured and ready-to-use Express.js web application designed for the Node.js runtime. The project is built using TypeScript, providing a robust foundation for developing web applications effortlessly.
-
-Here's why:
 - **Linting & Formatting:**
   - ✔️ ESLint for code linting
   - 🎨 Prettier for code formatting
@@ -91,34 +88,28 @@ Before you begin contributing to this project, make sure you have the following 
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/BoBsRepository/create-express-ts-template.git
+   git clone https://github.com/Puskar-Roy/Attendance-System---Backend
    ```
 2. **Install Dependencies:**
    ```bash
-    cd create-express-ts-template
     npm install
    ```
 3. **Add Environment Variables:**
    ```bash
-   cd create-express-ts-template
    touch .env
    ```
 4. **Add the necessary configuration:**
    ```bash
-   PORT = 5050 #Your Port 
-   MONGOURI = <your-mongodb>
-   MODE = DEV # DEV = development or PROD = production
-   JWT_SECRET = "jdiafhoaifdhoislknsfnlkfbhojsdfijoeipweopkfek;jsdm;kvm;cvkjvjpisdv" # Your Secret
-   JWT_COOKIE_EXPIRES_IN = 7 #In Days
+   PORT=5050  //Port 5000 
+   MONGOURI=<your-mongo-uri>
+
+    JWT_SECRET=<itsyourjwtsecrent?
+    JWT_COOKIE_EXPIRES_IN="3d"  // 3 days
+    DEV_MODE=DEV   // DEV or PROD
    ```
 5. **Run This Project:**
    ```bash
    npm run dev
-   ```
-   or
-   
-   ```bash
-   npm start
    ```
 
    <p align="right">(<a href="#readme-top">back to top</a>)</p>
