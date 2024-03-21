@@ -3,15 +3,14 @@
 <br />
 <div align="center">
   <a href="https://github.com/Puskar-Roy/Attendance-System---Backend">
-    <img src="https://repository-images.githubusercontent.com/162537377/9c807700-9828-11ea-8a3b-47411956130e" alt="Logo" width="200" height="100">
+    <img src="https://attendancee.vercel.app/logo1.png" alt="Logo" width="200" height="200">
   </a>
 
-  <h3 align="center">Express Js with Typescript</h3>
+  <h3 align="center">Full-Stack JavaScript Attendance Portal - Backend</h3>
 
   <p align="center">
-    Full-Stack JavaScript Attendance Portal - Backend
     <br />
-    <a href="https://github.com/Puskar-Roy/Attendance-System---Backend"><strong>Explore the docs »</strong></a>
+    <a href="https://www.postman.com/warped-resonance-359125/workspace/attendance-system"><strong>Postman Public Workspace</strong></a>
     <br />
     <br />
     <a href="https://timekeeper-api.vercel.app">View Demo</a>
@@ -21,6 +20,42 @@
     <a href="https://github.com/Puskar-Roy/Attendance-System---Backend/issues">Request Feature</a>
   </p>
 </div>
+
+
+
+##### Note: *You can test API endpoints only in the development environment; otherwise, a CORS error will occur. To avoid this, create a .env file and add DEV_MODE=DEV inside.*
+
+## API End Points
+
+### 1. Authentication Routes
+```bash
+/api/auth/login                                POST               //for login
+/api/auth/register                             POST               //for register
+```
+
+### 2. Users Routes
+
+```bash
+/api/users                                     GET               //for all users
+/api/users/:id                                 GET               //for a single user
+```
+
+### 3. Attendance Routes
+
+```bash
+/api/attendance/counts/:userId                 GET               //for the number of attendance
+/api/attendance/user/:attendenceId             GET               //for a single attendance
+/api/attendance/date/:date                     GET               //for all the attendances of a date
+/api/attendance/:userId                        GET               //for all the attendances of a user
+/api/attendance/change-status/:attendanceId    PUT               //for change the status of an attendance
+/api/attendance                                POST              //for create an attendance
+/api/attendance/mark-absent                    POST              //for marking the absent users
+/api/attendance/all                            POST              //for create all attendance
+/api/attendance/:attendanceId                  DEL               //for delete an attendance
+```
+
+
+
 
 
 
