@@ -195,3 +195,28 @@ export const markAbsentUsers = asyncHandler(
     }
   }
 );
+
+export const createAllAtendance = asyncHandler(
+  async (req: Request, res: Response) => {
+    try {
+      const { date, attendanceData } = req.body;
+      const promises = attendanceData.map(
+        async (data: { userId: string; status: string }) => {
+          const attendance = new AttendanceModel({
+            userId: data.userId,
+            date,
+            status: data.status,
+          });
+          await attendance.save();
+        }
+      );
+
+      await Promise.all(promises);
+
+      res.status(201).json({ message: 'Attendance submitted successfully!' });
+    } catch (error) {
+      console.error('Error submitting attendance:', error);
+      res.status(500).json({ message: 'Server Error' });
+    }
+  }
+);

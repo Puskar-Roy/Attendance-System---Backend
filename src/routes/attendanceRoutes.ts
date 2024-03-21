@@ -8,12 +8,14 @@ import {
   changeAttendance,
   deleteAttendance,
   markAbsentUsers,
+  createAllAtendance,
 } from '../controllers/attendanceController';
 import { protect, protectAdmin } from '../middleware/middleware';
 
 const router: Router = express.Router();
 
 router.post('/attendance', protect, createAttendance);
+router.post('/attendance/all', protect, createAllAtendance);
 router.get('/attendance/:userId', protectAdmin, getAttendance);
 router.get('/attendance/user/:id', protectAdmin, getSingleAttendance);
 router.get('/attendance/date/:date', protectAdmin, getAttendancewithDate);
