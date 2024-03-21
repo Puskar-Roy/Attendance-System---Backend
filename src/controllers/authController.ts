@@ -29,6 +29,7 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
       token: token,
       email: user.email,
       role: user.role,
+      id: user._id,
     });
   } catch (error) {
     console.error('Login error:', error.message);
@@ -62,6 +63,7 @@ export const register = asyncHandler(async (req: Request, res: Response) => {
       token: token,
       role: user.role,
       email: user.email,
+      id: user._id,
     });
   } catch (error) {
     console.error('Registration error:', error.message);

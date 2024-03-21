@@ -20,7 +20,7 @@ export const createAttendance = asyncHandler(
 
       const attendance = new AttendanceModel({ userId, status });
       await attendance.save();
-      res.status(201).send(attendance);
+      res.status(201).send({ message: 'Attendance Done!' });
     } catch (err) {
       console.error(err);
       res.status(500).send('Server Error');
@@ -56,6 +56,28 @@ export const getAttendancewithDate = asyncHandler(
       }).exec();
 
       res.status(200).send(attendance);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
+export const getAttendanceCounts = asyncHandler(
+  async (req: Request, res: Response) => {
+    try {
+      const { userId } = req.params;
+
+      const presentDays = await AttendanceModel.countDocuments({
+        userId,
+        status: 'present',
+      });
+      const absentDays = await AttendanceModel.countDocuments({
+        userId,
+        status: 'absent',
+      });
+
+      res.status(200).json({ presentDays, absentDays });
     } catch (err) {
       console.error(err);
       res.status(500).send('Server Error');

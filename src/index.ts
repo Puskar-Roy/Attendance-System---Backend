@@ -9,7 +9,7 @@ import config from './config/config';
 import CheckError from './util/checkError';
 import errorHandler from './middleware/errorMiddleware';
 import authRoutes from './routes/authRoutes';
-import { protect } from './middleware/middleware';
+import attendanceRoutes from './routes/attendanceRoutes';
 
 const app: Express = express();
 
@@ -23,7 +23,8 @@ const corsOptions: CorsOptions = {
     }
   },
 };
-app.use(cors(corsOptions));
+// config.DEV_MODE === 'DEV' ? app.use(cors()) : app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 app.use(helmet());
 app.use(xss());
@@ -39,6 +40,7 @@ app.use(limiter);
 import './database/connectDb';
 
 app.use('/api/auth', authRoutes);
+app.use('/api', attendanceRoutes);
 
 app.get('/', (req: Request, res: Response) => {
   res.json({ success: true, message: 'API IS WORKING 🥳' });
