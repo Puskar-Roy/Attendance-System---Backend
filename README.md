@@ -88,13 +88,11 @@
   - 🚦 Rate limiting with express-rate-limit for protection against brute-force attacks
   - 🌐 CORS (Cross-Origin Resource Sharing) configured to allow requests only from a specific origin  
 
-Of course, This template may not cover all project needs, as your requirements may vary. More updates will be added in the future. Feel free to suggest changes by forking this repo, creating a pull request, or opening an issue. Thanks to all contributors who have helped enhance this template!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
-This section highlights the key frameworks and libraries that form the foundation of your project. Below are some notable examples:
 
 
 - **[![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/):** A JavaScript runtime built on Chrome's V8 JavaScript engine.
